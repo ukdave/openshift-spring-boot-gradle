@@ -1,0 +1,6 @@
+server:
+  address: ${OPENSHIFT_DIY_IP}
+  port: ${OPENSHIFT_DIY_PORT}
+
+logging:
+  path: ${OPENSHIFT_LOG_DIR}
