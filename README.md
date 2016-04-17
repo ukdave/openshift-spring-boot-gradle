@@ -4,7 +4,7 @@ This is a very basic [Spring Boot](http://projects.spring.io/spring-boot/) app u
 
 ## How To Use
 
-First off sign-up for a free [OpenShift](https://www.openshift.com/) account and install the client tools.
+First off sign-up for a free [OpenShift](https://www.openshift.com/) account and [install the client tools](https://developers.openshift.com/managing-your-applications/client-tools.html).
 
 Next, create a new app using the DIY cartridge (this will create the app and clone the repository to *<app-name>* directory):
 
@@ -12,8 +12,9 @@ Next, create a new app using the DIY cartridge (this will create the app and clo
 
 Delete the template project:
 
+    cd <app-name>
     git rm -rf .openshift README.md diy misc
-    git commit -am "Removed template application source code"
+    git commit -am "Remove template application source code"
 
 Pull in this repository:
 
@@ -24,9 +25,9 @@ Finally, push to OpenShift:
 
     git push
 
-The initial deployment may take a couple of minutes while it downloads Gradle and builds the code.
+The initial deployment may take a couple of minutes while it downloads Gradle and builds the code. Subsequent deployments will be faster.
 
-You should now be able to browse to `https://<app-name>-<domain>.rhcloud.com/` and you should see "Hello World".
+If everything worked you should now be able to browse to `https://<app-name>-<domain>.rhcloud.com/` and you should see "Hello World". Management information (courtesy of Spring Boot Actuator) is available at `https://<app-name>-<domain>.rhcloud.com/manage/`
 
 
 ## Details
