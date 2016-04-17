@@ -29,13 +29,17 @@ The initial deployment may take a couple of minutes while it downloads Gradle an
 
 If everything worked you should now be able to browse to `https://<app-name>-<domain>.rhcloud.com/` and you should see "Hello World". Management information (courtesy of Spring Boot Actuator) is available at `https://<app-name>-<domain>.rhcloud.com/manage/`
 
+You can also tail the application log file with:
+
+    rhc tail <app-name>
+
 
 ## Details
 
-This is just a standard Spring Boot app. The only bits needed to get it running on OpenShift are in the `.openshift` directory.
+This is just a standard Spring Boot app (although I've chosen to use Undertow instead of Tomcat). The only bits needed to get it running on OpenShift are in the `.openshift` directory:
 
 - `deploy` - OpenShift runs this script whenever you push the repository. It installs Gradle if not already installed, then cleans and builds the code. This will create a single fat-JAR under the `build` directory.
 - `start` - OpenShift runs this to start the app. It sets the PATH to point to Java 8 and then runs `java -jar` to launch the Spring Boot app.
 - `stop` - OpenShift runs this to stop the app. It uses `ps` to find the PID of the Spring Boot app and then uses `kill` to stop it.
 
-The `start` script also sets the active Spring profile to one called `openshift`. This allows us to configure any application properties specific to the OpenShift environemnt (e.g. database connections) in `application-openshift.yml' overriding any settings for local development in `application.yml`.
+The `start` script also sets the active Spring profile to one called `openshift`. This allows us to configure any application properties specific to the OpenShift environemnt (e.g. database connections) in `application-openshift.yml` overriding any settings for local development in `application.yml`.
